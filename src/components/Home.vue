@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div class="wrapper">
         <div class="search_box_container">
             <div class="search_box">
                 <input class="search_input" type="text" name="searchCocktail" placeholder="Search cocktail" v-model="cocktailSearched" v-on:keyup.13="searchCocktail()">
@@ -200,7 +200,7 @@ export default {
         margin-top: 2%;
     }
     .card_cocktail {
-        width: calc(100% / 4 - 20px);
+        max-width: calc(100% / 4 - 20px);
         height: 360px;
         margin: 20px 10px;
         border-top-left-radius: 25px;
@@ -236,4 +236,29 @@ export default {
         height: 45px;
     }
     /* /stile del main con sezione stistiche e card drink */
+
+    @media screen and (max-width: 1400px) {
+        .search_box_container {
+            margin-top: 8%;
+        }
+        .card_cocktail {
+            max-width: calc(100% / 3 - 20px);
+        
+        }
+    }
+
+    @media screen and (max-width: 1000px) {
+        .search_box_container {
+            margin-top: 10%;
+        }
+        .card_cocktail {
+            max-width: calc(100% / 2 - 20px);
+        }
+    }
+
+    @media screen and (max-width: 700px) {
+        .card_cocktail {
+            max-width: calc(100% / 1 - 20px);
+        }
+    }
 </style>
