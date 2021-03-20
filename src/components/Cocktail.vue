@@ -34,15 +34,18 @@ export default {
   mounted: function () {
     var self = this;
     var key;
+
+    // mi creo un array contententi le i nomi delle chiavi riferite agli ingredienti
+    for (let i = 1; i <= 15; i++) {
+      self.ingredientKey.push('strIngredient' + i);
+    }
+
     axios
       .get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=' + self.$route.params.id)
       .then((result) => {
           self.product = result.data.drinks;
-
-          for (let i = 1; i <= 15; i++) {
-            self.ingredientKey.push('strIngredient' + i);
-          }
-
+          
+          // vado a ciclare nell'oggetto contentente tutte le informazioni del drink andando a confrontare se le chiavi dell'oggetto hanno una corrispondenza con i nomi delle chiavi degli ingredienti del drink, se trovo una corrispondenza pusho il valore della chiave in un array 'ingredients' che mi servirà per andare a creare le card contenenti gli ingredienti.
           for (key in self.product[0]) {
             var ingredient = self.ingredientKey.includes(key);
             if (ingredient) {
