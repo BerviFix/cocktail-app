@@ -93,7 +93,6 @@ export default {
                     })
                     .then((result) => {
                         self.cocktailSearch.push(result.data.drinks);
-                        console.log(result.data.drinks);
                     });
             }
         },
@@ -110,7 +109,6 @@ export default {
                 .get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s')
                 .then((result) => {
                     self.cocktailHome.push(result.data.drinks);
-                    console.log(self.cocktailHome);
                 });
     },
 }
@@ -212,6 +210,10 @@ export default {
     }
     .card_cocktail:hover {
         transform: scale(1.025);
+    }
+    .card_cocktail a {
+        text-decoration: none;
+        color: inherit;
     }
     .cocktail_name {
         width: 100%;

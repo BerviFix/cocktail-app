@@ -36,7 +36,10 @@ export default {
     height: 80px;
     background-color: white;
 }
-
+nav a {
+    text-decoration: none;
+    color: inherit;
+}
 .logo {
     width: 50px;
     height: 50px;
