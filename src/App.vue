@@ -9,13 +9,13 @@
       <router-view></router-view>
     </main>
     
-    <footer>
-    </footer>
+    <Footer />
   </div>
 </template>
 
 <script>
-import Header from './components/Header'
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 export default {
   name: 'App',
@@ -28,7 +28,8 @@ export default {
 
   },
   components: {
-    Header
+    Header,
+    Footer
   },
 
 }

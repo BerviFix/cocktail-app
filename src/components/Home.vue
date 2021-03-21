@@ -13,14 +13,19 @@
         </div>
 
         <!-- sezione statistiche -->
-        <div class="statistics_wrapper">
+        <div class="statistics_wrapper" v-if="cocktailSearch.length ==0">
             <ul class="statistics">
                 <li v-for="(report, index) in statistics" :key="index">
                     <span>{{ report.icon }}</span>
                     <h2>{{ report.text }}: </h2>
                     <span>{{ report.info }}</span>
                 </li>
-            </ul>
+            </ul>       
+        </div>
+        
+        <!-- statistiche di ricerca -->
+        <div class="search_statistics" v-if="cocktailSearch.length !=0">
+            <h2>🍹 Total Drinks: {{ cocktailSearch[0].length }}</h2>
         </div>
         <!-- /sezione statistiche -->
 
@@ -50,7 +55,7 @@
         </section>
         <!-- /sezione ricerca cocktail -->
 
-        <div class="button_more">
+        <div class="button_more" v-if="cocktailSearch.length == 0">
             <button @click="loadMore()">
                 <h4>Load more</h4>
                 <i class="fas fa-plus"></i>
@@ -103,6 +108,7 @@ export default {
                         self.cocktailSearch.push(result.data.drinks);
                     });
             }
+            console.log(self.cocktailSearch);
         },
         clickLogo: function () {
             var self = this;
@@ -122,8 +128,11 @@ export default {
                 .then((result) => {
                     self.cocktailHome.push(result.data.drinks);
                 });
+        
+        
     },
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -200,6 +209,13 @@ export default {
     .statistics span {
         font-size: 20px;
     }
+    .search_statistics {
+        display: flex;
+        justify-content: center;
+        width: 70%;
+        margin: auto;
+        margin-top: 3%;
+    }
 
     /* stile card cocktail */
     .card_container {
@@ -241,13 +257,23 @@ export default {
         align-items: center;
         width: 100%;
         height: 60px;
-    }
+        margin: 3% 0;    }
     .button_more button {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 195px;
         height: 45px;
+        background-color: black;
+        color: white;
+        border: none;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+        border-radius: 6px;
+    }
+    .button_more i {
+        margin-left: 5%;
     }
     /* /stile del main con sezione stistiche e card drink */
 
