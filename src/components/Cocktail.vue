@@ -16,12 +16,12 @@
       <h2>Ingredients ({{ingredients.length}})</h2>
       <div class="cocktail_ingredients_card_container">
         <div class="cocktail_ingredients_card" v-for="(ingredient,index) in ingredients" :key="index">
-        <div class="cocktail_ingredients_card_content" v-if="ingredient != null">
-          <img :src="'https://www.thecocktaildb.com/images/ingredients/' + ingredient + '-Medium.png'" alt="cocktail-img" width="200px" height="200px">
-          <h3>{{ measures[index] }} {{ ingredient }}</h3>
+          <div class="cocktail_ingredients_card_content" v-if="ingredient != null">
+            <img :src="'https://www.thecocktaildb.com/images/ingredients/' + ingredient + '-Medium.png'" alt="cocktail-img" width="200px" height="200px">
+            <h3>{{ measures[index] }} {{ ingredient }}</h3>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
       .then((result) => {
           self.product = result.data.drinks;
           
-          // vado a ciclare nell'oggetto contentente tutte le informazioni del drink andando a confrontare se le chiavi dell'oggetto hanno una corrispondenza con i nomi delle chiavi degli ingredienti del drink, se trovo una corrispondenza pusho il valore della chiave in un array 'ingredients' che mi servirà per andare a creare le card contenenti gli ingredienti.
+          // vado a ciclare nell'oggetto contentente tutte le informazioni del drink andando a confrontare se le chiavi dell'oggetto hanno una corrispondenza con i nomi delle chiavi degli ingredienti e dele quantità, se trovo una corrispondenza pusho il valore della chiave nei corrispettivi array che mi serviranno per andare a creare le card contenenti gli ingredienti.
           for (key in self.product[0]) {
             var ingredient = self.ingredientKey.includes(key);
             var measure = self.measureKey.includes(key);

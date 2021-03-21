@@ -25,30 +25,37 @@
         <!-- /sezione statistiche -->
 
         <!-- sezione card cocktail -->
-            <div class="card_container" v-if="cocktailSearch.length == 0">
-                <div class="card_cocktail" v-for="cocktail in cocktailHome[0]" :key="cocktail.idDrink">
-                    <router-link :to="{ name: 'cocktail', params: {id: cocktail.idDrink }  }">
-                        <img :src="cocktail.strDrinkThumb" alt="cocktail-img" width="100%" height="300px">
-                        <div class="cocktail_name">
-                            <h2>{{cocktail.strDrink}}</h2>
-                        </div>
-                    </router-link>
-                </div>
+        <div class="card_container" v-if="cocktailSearch.length == 0">
+            <div class="card_cocktail" v-for="cocktail in cocktailHome[0].slice(0,cocktailHomeSlice)" :key="cocktail.idDrink">
+                <router-link :to="{ name: 'cocktail', params: {id: cocktail.idDrink }  }">
+                    <img :src="cocktail.strDrinkThumb" alt="cocktail-img" width="100%" height="300px">
+                    <div class="cocktail_name">
+                        <h2>{{cocktail.strDrink}}</h2>
+                    </div>
+                </router-link>
             </div>
+        </div>
         <!-- /sezione card cocktail -->
 
         <!-- sezione ricerca cocktail -->
-            <section class="card_container" v-if="cocktailSearch.length !=0">
-                <div class="card_cocktail" v-for="cocktail in cocktailSearch[0]" :key="cocktail.idDrink">
-                    <router-link :to="{ name: 'cocktail', params: {id: cocktail.idDrink }  }">
-                        <img :src="cocktail.strDrinkThumb" alt="cocktail-img" width="100%" height="300px">
-                        <div class="cocktail_name">
-                            <h2>{{cocktail.strDrink}}</h2>
-                        </div>
-                    </router-link>
-                </div>
-            </section>
+        <section class="card_container" v-if="cocktailSearch.length !=0">
+            <div class="card_cocktail" v-for="cocktail in cocktailSearch[0]" :key="cocktail.idDrink">
+                <router-link :to="{ name: 'cocktail', params: {id: cocktail.idDrink }  }">
+                    <img :src="cocktail.strDrinkThumb" alt="cocktail-img" width="100%" height="300px">
+                    <div class="cocktail_name">
+                        <h2>{{cocktail.strDrink}}</h2>
+                    </div>
+                </router-link>
+            </div>
+        </section>
         <!-- /sezione ricerca cocktail -->
+
+        <div class="button_more">
+            <button @click="loadMore()">
+                <h4>Load more</h4>
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -78,6 +85,7 @@ export default {
             ],
             cocktailHome: [],
             cocktailSearch: [],
+            cocktailHomeSlice: 12,
         }
     },
     methods: {
@@ -100,6 +108,10 @@ export default {
             var self = this;
             self.cocktailSearch = [];
             self.cocktailSearched = "";
+        },
+        loadMore: function () {
+            var self = this;
+            self.cocktailHomeSlice += 12;
         },
     },
     created: function () {
