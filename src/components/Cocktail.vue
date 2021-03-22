@@ -27,7 +27,7 @@
     <div class="browse_more_wrapper">
       <h2>Browse More</h2>
       <div class="browse_more_container">
-        <div class="card_cocktail" v-for="cocktail in browseMore" :key="cocktail.idDrink" @click="locationReload()">
+        <div class="card_cocktail animate__animated animate__fadeInUp" v-for="cocktail in browseMore" :key="cocktail.idDrink" @click="locationReload()">
           <router-link :to="{ name: 'cocktail', params: {id: cocktail.idDrink }}">
             <img :src="cocktail.strDrinkThumb" alt="cocktail-img" width="100%" height="300px">
             <div class="cocktail_name">

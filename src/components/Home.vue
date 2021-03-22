@@ -31,7 +31,7 @@
 
         <!-- sezione card cocktail -->
         <div class="card_container" v-if="cocktailSearch.length == 0">
-            <div class="card_cocktail" v-for="cocktail in cocktailHome[0].slice(0,cocktailHomeSlice)" :key="cocktail.idDrink">
+            <div class="card_cocktail animate__animated animate__fadeInLeft" v-for="cocktail in cocktailHome[0].slice(0,cocktailHomeSlice)" :key="cocktail.idDrink">
                 <router-link :to="{ name: 'cocktail', params: {id: cocktail.idDrink }  }">
                     <img :src="cocktail.strDrinkThumb" alt="cocktail-img" width="100%" height="300px">
                     <div class="cocktail_name">
@@ -44,7 +44,7 @@
 
         <!-- sezione ricerca cocktail -->
         <section class="card_container" v-if="cocktailSearch.length !=0">
-            <div class="card_cocktail" v-for="cocktail in cocktailSearch[0]" :key="cocktail.idDrink">
+            <div class="card_cocktail animate__animated animate__fadeInRight" v-for="cocktail in cocktailSearch[0]" :key="cocktail.idDrink">
                 <router-link :to="{ name: 'cocktail', params: {id: cocktail.idDrink }  }">
                     <img :src="cocktail.strDrinkThumb" alt="cocktail-img" width="100%" height="300px">
                     <div class="cocktail_name">
