@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+        <!-- sezione input ricerca -->
         <div class="search_box_container">
             <div class="search_box">
                 <input class="search_input" type="text" name="searchCocktail" placeholder="Search cocktail" v-model="cocktailSearched" v-on:keyup.13="searchCocktail()">
@@ -11,8 +12,9 @@
                 </button>
             </div>
         </div>
+        <!-- sezione input ricerca -->
 
-        <!-- sezione statistiche -->
+        <!-- sezione statistiche home -->
         <div class="statistics_wrapper" v-if="cocktailSearch.length ==0">
             <ul class="statistics">
                 <li v-for="(report, index) in statistics" :key="index">
@@ -22,12 +24,13 @@
                 </li>
             </ul>       
         </div>
+        <!-- /sezione statistiche home -->
         
         <!-- statistiche di ricerca -->
         <div class="search_statistics" v-if="cocktailSearch.length !=0">
             <h2>🍹 Total Drinks: {{ cocktailSearch[0].length }}</h2>
         </div>
-        <!-- /sezione statistiche -->
+        <!-- /statistiche di ricerca -->
 
         <!-- sezione card cocktail -->
         <div class="card_container" v-if="cocktailSearch.length == 0">
@@ -54,13 +57,16 @@
             </div>
         </section>
         <!-- /sezione ricerca cocktail -->
-
+        
+        <!-- bottone load more -->
         <div class="button_more" v-if="cocktailSearch.length == 0">
             <button @click="loadMore()">
                 <h4>Load more</h4>
                 <i class="fas fa-plus"></i>
             </button>
         </div>
+        <!-- bottone load more -->
+
     </div>
 </template>
 
@@ -95,6 +101,7 @@ export default {
     },
     methods: {
         searchCocktail: function () {
+            // questa funzione la uso per effetturare la ricerca del drink, recupero il paremetro inserito nel box di ricerca dall'utente e lo uso per completare l'indirizzo della chiamata GET all'API, una volta che ricerco la risposta dalla chiamata AJAX mi salvo tutto in un array "cocktailSearch".
             var self = this;
             self.cocktailSearch = [];
             if (self.cocktailSearched != "") {
@@ -111,25 +118,25 @@ export default {
             console.log(self.cocktailSearch);
         },
         clickLogo: function () {
+            // questa funzione la uso per svuotare il campo di ricerca e l'array di ricerca così da tornare a visualizzare la home.
             var self = this;
             self.cocktailSearch = [];
             self.cocktailSearched = "";
         },
         loadMore: function () {
+            // questa funzione la uso per andare a recuperare più drink dall'array che visualizzione nella home.
             var self = this;
             self.cocktailHomeSlice += 12;
         },
     },
     created: function () {
-        //ho aggiunto una funzione nel created che mi richiama all'endpoint relativo un nmero di cocktail così avrò una homepage dinamica
+        //ho aggiunto una funzione nel created che mi richiama all'endpoint relativo un numero di cocktail così da avere una homepage dinamica
         var self = this;
             axios
                 .get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s')
                 .then((result) => {
                     self.cocktailHome.push(result.data.drinks);
                 });
-        
-        
     },
 }
 
@@ -137,6 +144,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    /* stile search box */
     .search_box_container {
       display: flex;
       justify-content: center;
@@ -182,7 +190,9 @@ export default {
       transition: 0.4s;
       outline:none;
     }
+    /* /stile search box */
 
+    /* stile sezione statistiche */
     .statistics_wrapper {
     width: 70%;
     margin: auto;
@@ -216,6 +226,7 @@ export default {
         margin: auto;
         margin-top: 3%;
     }
+    /* stile sezione statistiche */
 
     /* stile card cocktail */
     .card_container {
@@ -234,10 +245,6 @@ export default {
         box-shadow: 4px 4px 15px 1px rgba(0, 0, 0, 0.5);
         overflow: hidden;
         cursor: pointer;
-        transition: 1s;
-    }
-    .card_cocktail:hover {
-        transform: scale(1.025);
     }
     .card_cocktail a {
         text-decoration: none;
@@ -250,7 +257,9 @@ export default {
         justify-content: center;
         align-items: center;
     }
+    /* /stile card cocktail */
 
+    /* stile bottone load more */
     .button_more {
         display: flex;
         justify-content: center;
@@ -275,8 +284,10 @@ export default {
     .button_more i {
         margin-left: 5%;
     }
+    /* /stile bottone load more */
     /* /stile del main con sezione stistiche e card drink */
 
+    /* media query per la gestione del responsive */
     @media screen and (max-width: 1400px) {
         .search_box_container {
             margin-top: 8%;
@@ -301,4 +312,5 @@ export default {
             max-width: calc(100% / 1 - 20px);
         }
     }
+    /* /media query per la gestione del responsive */
 </style>
