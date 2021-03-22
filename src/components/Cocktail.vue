@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="cocktail_info" v-for="(cocktail,index) in product" :key="index">
-      <img class="cocktail_image" :src="cocktail.strDrinkThumb" alt="cocktail-img" width="700px" height="700px">
-      <div class="info_content">
+      <img class="cocktail_image animate__animated animate__fadeInLeft" :src="cocktail.strDrinkThumb" alt="cocktail-img" width="700px" height="700px">
+      <div class="info_content animate__animated animate__fadeInRight">
         <h3>Home / {{cocktail.strDrink}}</h3>
         <h1>{{cocktail.strDrink}}</h1>
         <h2>Instruction:</h2>
@@ -15,7 +15,7 @@
     <div class="cocktail_ingredients_wrapper">
       <h2>Ingredients ({{ingredients.length}})</h2>
       <div class="cocktail_ingredients_card_container">
-        <div class="cocktail_ingredients_card" v-for="(ingredient,index) in ingredients" :key="index">
+        <div class="cocktail_ingredients_card animate__animated animate__zoomIn" v-for="(ingredient,index) in ingredients" :key="index">
           <div class="cocktail_ingredients_card_content" v-if="ingredient != null">
             <img :src="'https://www.thecocktaildb.com/images/ingredients/' + ingredient + '-Medium.png'" alt="cocktail-img" width="200px" height="200px">
             <h3>{{ measures[index] }} {{ ingredient }}</h3>
