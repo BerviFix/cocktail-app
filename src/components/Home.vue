@@ -3,7 +3,7 @@
         <!-- sezione input ricerca -->
         <div class="search_box_container">
             <div class="search_box">
-                <i class="fas fa-search"></i>
+                <i class="fas fa-search" @click="searchCocktail()"></i>
                 <div class="search_input_container">
                     <input class="search_input" type="text" name="searchCocktail" placeholder="Search cocktail" v-model="cocktailSearched" v-on:keyup.13="searchCocktail()">
                     <span class="delete_text" @click="returnHome()" v-if="cocktailSearched !='' ">Clear</span>
@@ -163,6 +163,7 @@ export default {
     }
     .search_box  i {
       font-size: 32px;
+      cursor: pointer;
     }
   .search_input_container {
       display: flex;
