@@ -2,9 +2,9 @@
     <header>
       <nav>
           <router-link to="/">
-            <img class="logo" src="https://cdn2.iconfinder.com/data/icons/party-new-years/128/Party_Newyears_Cocktail-512.png" alt="" @click="clickLogo()">
+            <div class="logo">🍹</div>
           </router-link>
-          <router-link to="/"><h1 @click="clickLogo()">Cocktail Time</h1></router-link>
+          <router-link to="/"><h1 @click="returnHome()">Cocktail Time</h1></router-link>
       </nav>
     </header>
 </template>
@@ -13,7 +13,7 @@
 export default {
   name: 'Header',
   methods: {
-       clickLogo: function () {
+       returnHome: function () {
             var self = this;
             self.cocktailSearch = [];
             self.cocktailSearched = "";
@@ -41,11 +41,11 @@ nav a {
     color: inherit;
 }
 .logo {
-    width: 50px;
-    height: 50px;
+    font-size: 20px;
     cursor: pointer;
 }
 nav h1 {
+    margin-left: 5px;
     cursor: pointer;
 }
 </style>

@@ -3,12 +3,13 @@
         <!-- sezione input ricerca -->
         <div class="search_box_container">
             <div class="search_box">
-                <input class="search_input" type="text" name="searchCocktail" placeholder="Search cocktail" v-model="cocktailSearched" v-on:keyup.13="searchCocktail()">
-                <i class="fas fa-times delete" @click="clickLogo()"></i>
-                <button class="search_button" href="#" @click="searchCocktail()">
-                    <i class="material-icons">
-                        search
-                    </i>
+                <i class="fas fa-search"></i>
+                <div class="search_input_container">
+                    <input class="search_input" type="text" name="searchCocktail" placeholder="Search cocktail" v-model="cocktailSearched" v-on:keyup.13="searchCocktail()">
+                    <span class="delete_text" @click="returnHome()" v-if="cocktailSearched !='' ">Clear</span>
+                </div>
+                
+                <button class="search_button" href="#" @click="searchCocktail()">Search
                 </button>
             </div>
         </div>
@@ -34,7 +35,7 @@
 
         <!-- sezione card cocktail -->
         <div class="card_container" v-if="cocktailSearch.length == 0">
-            <div class="card_cocktail animate__animated animate__fadeInLeft" v-for="cocktail in cocktailHome[0].slice(0,cocktailHomeSlice)" :key="cocktail.idDrink">
+            <div class="card_cocktail" v-for="cocktail in cocktailHome[0].slice(0,cocktailHomeSlice)" :key="cocktail.idDrink">
                 <router-link :to="{ name: 'cocktail', params: {id: cocktail.idDrink }  }">
                     <img :src="cocktail.strDrinkThumb" alt="cocktail-img" width="100%" height="300px">
                     <div class="cocktail_name">
@@ -47,7 +48,7 @@
 
         <!-- sezione ricerca cocktail -->
         <section class="card_container" v-if="cocktailSearch.length !=0">
-            <div class="card_cocktail animate__animated animate__fadeInRight" v-for="cocktail in cocktailSearch[0]" :key="cocktail.idDrink">
+            <div class="card_cocktail" v-for="cocktail in cocktailSearch[0]" :key="cocktail.idDrink">
                 <router-link :to="{ name: 'cocktail', params: {id: cocktail.idDrink }  }">
                     <img :src="cocktail.strDrinkThumb" alt="cocktail-img" width="100%" height="300px">
                     <div class="cocktail_name">
@@ -61,8 +62,7 @@
         <!-- bottone load more -->
         <div class="button_more" v-if="cocktailSearch.length == 0">
             <button @click="loadMore()">
-                <h4>Load more</h4>
-                <i class="fas fa-plus"></i>
+                <p>Load more +</p>
             </button>
         </div>
         <!-- bottone load more -->
@@ -117,7 +117,7 @@ export default {
             }
             console.log(self.cocktailSearch);
         },
-        clickLogo: function () {
+        returnHome: function () {
             // questa funzione la uso per svuotare il campo di ricerca e l'array di ricerca così da tornare a visualizzare la home.
             var self = this;
             self.cocktailSearch = [];
@@ -146,57 +146,70 @@ export default {
 <style scoped>
     /* stile search box */
     .search_box_container {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      height: 60px;
-      margin-top: 5%;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 125px;
+        margin-top: 5%;
     }
   .search_box {
       display: flex;
+      justify-content: space-around;
       align-items: center;
-      width: 300px;
+      width: 70%;
       height: 100%;
-      background: #2f3640;
-      border-radius: 40px;
+      background: #F5F5F5;
       padding: 10px;
     }
-  .delete {
-      color: tomato;
-      font-size: 16px;
-      margin-right: 10px;
+    .search_box  i {
+      font-size: 32px;
+    }
+  .search_input_container {
+      display: flex;
+      position: relative;
+      width: 70%;
+  }
+  .search_input {
+      width: 100%;
+      background: none;
+      color: black;
+      border: none;
+      border-bottom: 1px solid black;
+      outline: none;
+      font-size: 25px;
+      font-weight: bold;
+      line-height: 45px;
+    }
+    .search_input::placeholder {
+        color: lightgray;
+    }
+    .delete_text {
+      position: absolute;
+      bottom: 10px;
+      right: 0;
       cursor: pointer;
     }
-  .search_input {
-      width: 235px;
-      background: none;
-      color: white;
-      border:none;
-      outline: none;
-      padding: 0 6px;
-      font-size: 16px;
-      line-height: 40px;
-    }
   .search_button {
-      color:  #2f3640;
-      float: right;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background:  white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: 0.4s;
-      outline:none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 195px;
+        height: 45px;
+        background-color: black;
+        color: white;
+        border: none;
+        font: inherit;
+        font-weight: 500;
+        cursor: pointer;
+        outline: inherit;
     }
     /* /stile search box */
 
     /* stile sezione statistiche */
     .statistics_wrapper {
-    width: 70%;
-    margin: auto;
-    margin-top: 3%;
+        width: 70%;
+        margin: auto;
+        margin-top: 3%;
     }
     .statistics {
         display: flex;
@@ -240,9 +253,6 @@ export default {
         max-width: calc(100% / 4 - 20px);
         height: 360px;
         margin: 20px 10px;
-        border-top-left-radius: 25px;
-        border-bottom-right-radius: 25px;
-        box-shadow: 4px 4px 15px 1px rgba(0, 0, 0, 0.5);
         overflow: hidden;
         cursor: pointer;
     }
@@ -254,7 +264,6 @@ export default {
         width: 100%;
         height: 60px;
         display: flex;
-        justify-content: center;
         align-items: center;
     }
     /* /stile card cocktail */
@@ -279,7 +288,6 @@ export default {
         font: inherit;
         cursor: pointer;
         outline: inherit;
-        border-radius: 6px;
     }
     .button_more i {
         margin-left: 5%;

@@ -1,9 +1,9 @@
 <template>
     <div >
         <footer>
-            <h4 v-for="(content,index) in footer" :key="index">
+            <p v-for="(content,index) in footer" :key="index">
                 {{ content.text }}
-            </h4>
+            </p>
         </footer>
     </div>
 </template>

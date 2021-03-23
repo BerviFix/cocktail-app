@@ -2,8 +2,8 @@
   <div>
     <!-- sezione informazioni relative al drink selezionato -->
     <div class="cocktail_info" v-for="(cocktail,index) in product" :key="index">
-      <img class="cocktail_image animate__animated animate__fadeInLeft" :src="cocktail.strDrinkThumb" alt="cocktail-img" width="700px" height="700px">
-      <div class="info_content animate__animated animate__fadeInRight">
+      <img class="cocktail_image" :src="cocktail.strDrinkThumb" alt="cocktail-img" width="700px" height="700px">
+      <div class="info_content">
         <h3>Home / {{cocktail.strDrink}}</h3>
         <h1>{{cocktail.strDrink}}</h1>
         <h2>Instruction:</h2>
@@ -18,7 +18,7 @@
     <div class="cocktail_ingredients_wrapper">
       <h2>Ingredients ({{ingredients.length}})</h2>
       <div class="cocktail_ingredients_card_container">
-        <div class="cocktail_ingredients_card animate__animated animate__bounceIn" v-for="(ingredient,index) in ingredients" :key="index">
+        <div class="cocktail_ingredients_card" v-for="(ingredient,index) in ingredients" :key="index">
           <div class="cocktail_ingredients_card_content" v-if="ingredient != null">
             <img :src="'https://www.thecocktaildb.com/images/ingredients/' + ingredient + '-Medium.png'" alt="cocktail-img" width="200px" height="200px">
             <h3>{{ measures[index] }} {{ ingredient }}</h3>
@@ -32,7 +32,7 @@
     <div class="browse_more_wrapper">
       <h2>Browse More</h2>
       <div class="browse_more_container">
-        <div class="card_cocktail animate__animated animate__fadeInUp" v-for="cocktail in browseMore" :key="cocktail.idDrink" @click="locationReload()">
+        <div class="card_cocktail" v-for="cocktail in browseMore" :key="cocktail.idDrink" @click="locationReload()">
           <router-link :to="{ name: 'cocktail', params: {id: cocktail.idDrink }}">
             <img :src="cocktail.strDrinkThumb" alt="cocktail-img" width="100%" height="300px">
             <div class="cocktail_name">
@@ -118,9 +118,6 @@ export default {
     margin: auto;
     margin-top: 5%;
   }
-  .cocktail_image {
-    border-radius: 15px;
-  }
   .info_content {
     display: flex;
     flex-direction: column;
@@ -145,22 +142,19 @@ export default {
     margin-top: 5%;
   }
   .cocktail_ingredients_wrapper > h2 {
+    width: 60%;
     text-align: center;
   }
   .cocktail_ingredients_card_container {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 60%;
     margin-top: 2%;
   }
   .cocktail_ingredients_card {
     width: 350px;
     height: 350px;
     margin: 20px 10px;
-    border-top-left-radius: 100px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 100px;
-    box-shadow: 4px 4px 15px 1px rgba(0, 0, 0, 0.5);
     background-color: #F5F5F5;
     overflow: hidden;
     cursor: pointer;
@@ -194,9 +188,6 @@ export default {
     max-width: calc(100% / 4 - 20px);
     height: 360px;
     margin: 20px 10px;
-    border-top-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    box-shadow: 4px 4px 15px 1px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     cursor: pointer;
   }
@@ -208,7 +199,6 @@ export default {
     width: 100%;
     height: 60px;
     display: flex;
-    justify-content: center;
     align-items: center;
   }
   /* /stile sezione browse more */
